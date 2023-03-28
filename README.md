@@ -11,12 +11,6 @@ In this assignment, you will need to implement a WeChat like program, but much s
 Click the [use template](https://github.com/hezean/chatting/generate) to create a fork of this template - to avoid potential plagiarism dispute,
 **please be sure that your repository is made _private_ before the deadline**.
 
-> We also provide you a template with `lombok` that makes your code shorter and more elegant.
-> To use that, make sure you've checked the **Include all branches** option when creating your fork.
-> Then merge the `lombok` branch into `main`.
-> 
-> **You must submit all your code to the `main` branch.**
-
 You need to then clone your fork into local machine. You can then open the whole folder as a project in your
 IDE - it will recognize the Maven structure and automatically configure the project.
 
@@ -31,11 +25,22 @@ which is the dependency of `chatting-client` and `chatting-server`.
 > But it is not mandatory for you to follow this architecture.
 > You can move the model codes to other places if you want.
 
-The first thing you need to do is to install the parent pom into the local maven repository.
+Now, the first thing you need to do is to install the parent pom into the local maven repository.
 
 ```shell
 mvn install
 ```
+
+If you are a Windows user who has not configured Maven environment variables, you can run this command in IDEA by several ways as below:
+
+- double click the Ctrl key in IDEA to bring up a "Run Anything" pop-up window, then enter the command
+- click the "Execute Maven Goal" button on the top of Maven side bar, then enter the command
+- simply click on the "install" option in the "Lifecycle" folder of Maven side bar
+
+
+<p align="center">
+  <img  src="assets/mvn_command.jpg">
+</p>
 
 Note that each time after you modified the codes in `chatting-common`, you need to reinstall
 the subproject -- you can think about why.

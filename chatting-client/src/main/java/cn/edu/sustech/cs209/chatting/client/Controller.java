@@ -11,9 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;
 import java.util.Objects;
@@ -21,8 +18,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
-@Slf4j
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Controller implements Initializable {
 
     @FXML
@@ -46,7 +41,7 @@ public class Controller implements Initializable {
              */
             username = input.get();
         } else {
-            log.warn("Invalid username {}, exiting", input);
+            System.out.println("Invalid username " + input + ", exiting");
             Platform.exit();
         }
 
@@ -57,19 +52,19 @@ public class Controller implements Initializable {
     public void createPrivateChat() {
         AtomicReference<String> user = new AtomicReference<>();
 
-        val stage = new Stage();
-        val userSel = new ComboBox<String>();
+        Stage stage = new Stage();
+        ComboBox<String> userSel = new ComboBox<>();
 
         // FIXME: get the user list from server, the current user's name should be filtered out
         userSel.getItems().addAll("Item 1", "Item 2", "Item 3");
 
-        val okBtn = new Button("OK");
+        Button okBtn = new Button("OK");
         okBtn.setOnAction(e -> {
             user.set(userSel.getSelectionModel().getSelectedItem());
             stage.close();
         });
 
-        val box = new HBox(10);
+        HBox box = new HBox(10);
         box.setAlignment(Pos.CENTER);
         box.setPadding(new Insets(20, 20, 20, 20));
         box.getChildren().addAll(userSel, okBtn);
@@ -83,12 +78,12 @@ public class Controller implements Initializable {
     /**
      * A new dialog should contain a multi-select list, showing all user's name.
      * You can select several users that will be joined in the group chat, including yourself.
-     *
+     * <p>
      * The naming rule for group chats is similar to WeChat:
      * If there are > 3 users: display the first three usernames, sorted in lexicographic order, then use ellipsis with the number of users, for example:
-     *     UserA, UserB, UserC... (10)
+     * UserA, UserB, UserC... (10)
      * If there are <= 3 users: do not display the ellipsis, for example:
-     *     UserA, UserB (2)
+     * UserA, UserB (2)
      */
     @FXML
     public void createGroupChat() {
@@ -121,9 +116,9 @@ public class Controller implements Initializable {
                         return;
                     }
 
-                    val wrapper = new HBox();
-                    val nameLabel = new Label(msg.getSentBy());
-                    val msgLabel = new Label(msg.getData());
+                    HBox wrapper = new HBox();
+                    Label nameLabel = new Label(msg.getSentBy());
+                    Label msgLabel = new Label(msg.getData());
 
                     nameLabel.setPrefSize(50, 20);
                     nameLabel.setWrapText(true);
